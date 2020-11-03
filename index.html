@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Rock, Paper, Scissors</title>
+	<title>Rock, Paper, Scissors Game in Javascript</title>
 </head>
 <body>
-
+<!-- HTML is here for brower-sync --> 
 <script>
-// Rock, Paper, Scissor game
 
 let choice = ['rock', 'paper', 'scissors']
 
@@ -19,20 +18,22 @@ function playRound(playerSelection, computerSelection) {
 	if (playerSelection == computerSelection) {
 		return "Tie game.";
 	} else if ((choice.indexOf(playerSelection) - choice.indexOf(computerSelection)) == -1) {
-		return "Player wins.";
+		return `You win, because ${playerSelection} beats ${computerSelection}.`;
 	} else {
-		return "Computer wins.";
+		return `You lost, because ${computerSelection} beats ${playerSelection}.`;
 	}
-
-
 }
 
-const playerSelection = "rock";
-const computerSelection = computerPlay();
+function game() {
+	for (var i = 0; i < 5; i++) {
+		const playerSelection = prompt("Paper, rock, or scissors?: ").toLowerCase();
+		const computerSelection = computerPlay();
+		console.log(playRound(playerSelection, computerSelection));
+	}
+}
 
-console.log(playRound(playerSelection, computerSelection))
+game();
 
 </script>
-
 </body>
 </html>
