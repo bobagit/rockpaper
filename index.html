@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock, Paper, Scissors</title>
+</head>
+<body>
+
+<script>
+// Rock, Paper, Scissor game
+
+let choice = ['rock', 'paper', 'scissors']
+
+function computerPlay() {
+	// randomly return rock, paper, scissors
+	return choice[Math.floor(Math.random() * choice.length)]
+}
+
+function playRound(playerSelection, computerSelection) {
+	if (playerSelection == computerSelection) {
+		return "Tie game.";
+	}
+	if ((choice.indexOf(playerSelection) - choice.indexOf(computerSelection)) == -1) {
+		return "Player wins.";
+	} else {
+		return "Computer wins.";
+	}
+
+
+}
+
+const playerSelection = "rock";
+const computerSelection = computerPlay();
+
+console.log(playRound(playerSelection, computerSelection))
+
+</script>
+
+</body>
+</html>
