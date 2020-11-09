@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic Tac Toe Game</title>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<section>
+
+</section>
+
+<script>
+
+let choice = ['rock', 'paper', 'scissors']
+
+function computerPlay() {
+	// randomly return rock, paper, scissors
+	return choice[Math.floor(Math.random() * choice.length)]
+}
+
+function playRound(playerSelection, computerSelection) {
+	if (playerSelection == computerSelection) {
+		return "Tie game.";
+	} else if ((choice.indexOf(playerSelection) - choice.indexOf(computerSelection)) == -1) {
+		return `You win, because ${playerSelection} beats ${computerSelection}.`;
+	} else {
+		return `You lost, because ${computerSelection} beats ${playerSelection}.`;
+	}
+}
+
+function game() {
+	for (var i = 0; i < 5; i++) {
+		const playerSelection = prompt("Paper, rock, or scissors?: ").toLowerCase();
+		const computerSelection = computerPlay();
+		console.log(playRound(playerSelection, computerSelection));
+	}
+}
+
+game();
+
+</script>
+</body>
+</html>
