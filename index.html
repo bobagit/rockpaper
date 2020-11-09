@@ -11,9 +11,9 @@ function playRound(playerSelection, computerSelection) {
 	if (playerSelection == computerSelection) {
 		return "Tie game.";
 	} else if ((choice.indexOf(playerSelection) - choice.indexOf(computerSelection)) == -1) {
-		return `You win, because ${playerSelection} beats ${computerSelection}.`;
+		return `You lost, because ${playerSelection} beats ${computerSelection}.`;
 	} else {
-		return `You lost, because ${computerSelection} beats ${playerSelection}.`;
+		return `You won, because ${computerSelection} beats ${playerSelection}.`;
 	}
 }
 
