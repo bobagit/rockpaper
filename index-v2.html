@@ -23,40 +23,48 @@
 
 
 <script>
-let choice = ['rock', 'paper', 'scissors']
+let choice = ['rock', 'paper', 'scissors'];
+let playerScore = 0;
+let computerScore = 0;
+let endScore = 2;
+
 function computerChoice() {
 	// randomly return rock, paper, scissors
 	return choice[Math.floor(Math.random() * choice.length)]
 }
 
+
+
 function playRound(player, computer) {
 	if (player == computer) {
 		return "Tie game.";
 	} else if ((choice.indexOf(player) - choice.indexOf(computer)) == -1) {
+    computerScore += 1
 		return `You lost. You chose ${player}, computer chose ${computer}.`;
 	} else {
+    playerScore += 1
 		return `You won. You chose ${player}, computer chose ${computer}.`;
 	}
 }
 
-
+// Get User Selection
 let buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     let userChoice = button.id;
-    console.log(playRound(userChoice, computerChoice()));
+    
+    while ((playerScore < endScore) && (computerScore < endScore)) {
+      console.log(playRound(userChoice, computerChoice()));
+    };
   })
 })
 
+if (playerScore > computerScore) {
+  console.log("Player won.") 
+} else {
+  console.log("Computer won.")
+}
 
-// function game() {
-// 		const playerSelection = prompt("Paper, rock, or scissors?: ").toLowerCase();
-// 		const computerSelection = computerChoice();
-// 		// TODO: print results to screen
-//     console.log(playRound(playerSelection, computerSelection));
-// }
-
-// game();
 
 </script>
 </body>
