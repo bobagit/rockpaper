@@ -7,63 +7,109 @@
 </head>
 <body>
   
-  <h1>Tic Tac Toe</h2>
+  <h1>Rock, Paper, Scissors</h1>
 <section id="gameboard">
-  <div class="card">
-    <button type=button id='rock'>ROCK</button>
-  </div>
-  <div class="card">
-    <button type=button id='paper'>PAPER</button>
-  </div>
-  <div class="card">
-    <button type=button id='scissors'>SCISSORS</button>
+  <h2>Make a selection to play the game:</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="https://media.gettyimages.com/photos/limestone-picture-id170215830?s=2048x2048" >
+      <button type=button id='rock'>ROCK</button>
+    </div>
+    <div class="card">
+      <img src="https://media.istockphoto.com/photos/notebook-paper-wrinkled-wide-rule-picture-id172217394" />
+      <button type=button id='paper'>PAPER</button>
+    </div>
+    <div class="card">
+      <img src="https://cdn.pixabay.com/photo/2016/03/31/23/11/scissors-1297454_1280.png" />
+      <button type=button id='scissors'>SCISSORS</button>
+    </div>
   </div>
 
+  </div>
+
+    <div id="results">
+      <div id="gamesPlayed">
+      Games Played: <span class="result"></span></div>
+      <div id="playerScore">
+      </div>
+      <div id="computerScore">
+      </div>
+      <div id="gameStatus">
+      </div>
+    </div>
 </section>
-
-
 <script>
-let choice = ['rock', 'paper', 'scissors'];
+
+const choice = ['rock', 'paper', 'scissors'];
 let playerScore = 0;
 let computerScore = 0;
-let endScore = 2;
+let numGames = 5;
+let gamesPlayed = 0;
 
-function computerChoice() {
-	// randomly return rock, paper, scissors
-	return choice[Math.floor(Math.random() * choice.length)]
+function updateScore() {
+    document.getElementById("gamesPlayed").innerHTML = gamesPlayed;
+    document.getElementById("playerScore").innerHTML = playerScore;
+    document.getElementById("computerScore").innerHTML = computerScore;
+  }
+
+
+// Track score
+function updateGamesPlayed() {
+  gamesPlayed += 1;
+  if (gamesPlayed < numGames) {
+    updateScore();
+  } else {
+    updateScore();
+    if (computerScore === playerScore) {
+      document.getElementById("gamesPlayed").innerHTML = "TIE GAME";
+    } else if (computerScore > playerScore) {
+      document.getElementById("gamesPlayed").innerHTML = "COMPUTER WINS";
+    } else {
+      document.getElementById("gamesPlayed").innerHTML = "YOU WIN"
+    }
+    buttons.forEach((button) => {
+      button.disabled = true;
+  });
+};
 }
 
-
-
-function playRound(player, computer) {
-	if (player == computer) {
-		return "Tie game.";
-	} else if ((choice.indexOf(player) - choice.indexOf(computer)) == -1) {
-    computerScore += 1
-		return `You lost. You chose ${player}, computer chose ${computer}.`;
-	} else {
-    playerScore += 1
-		return `You won. You chose ${player}, computer chose ${computer}.`;
-	}
-}
-
-// Get User Selection
+// Get user choice
 let buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     let userChoice = button.id;
-    
-    while ((playerScore < endScore) && (computerScore < endScore)) {
-      console.log(playRound(userChoice, computerChoice()));
-    };
-  })
-})
+    document.getElementById("gameStatus").innerHTML = (playRound(userChoice, computerChoice()));
+  });
+});
 
-if (playerScore > computerScore) {
-  console.log("Player won.") 
-} else {
-  console.log("Computer won.")
-}
+// Generate random computer choice 
+function computerChoice(winner) {
+  return choice[Math.floor(Math.random() * choice.length)]
+};
+
+// Get winner
+function playRound(player, computer) {
+      if (player === computer) {
+        updateGamesPlayed();
+        return "Tie game.";
+      } else if ((choice.indexOf(player) === 0) && (choice.indexOf(computer) === 2)) {
+        playerScore += 1;
+        updateGamesPlayed();
+        return `You won this round. You chose ${player}, computer chose ${computer}.`;
+      } else if ((choice.indexOf(player) === 2) && (choice.indexOf(computer) === 0)) {
+        computerScore += 1;
+        updateGamesPlayed();
+        return `You lost this round. You chose ${player}, computer chose ${computer}.`;
+      } else if ((choice.indexOf(player) - choice.indexOf(computer)) === -1) {
+        computerScore += 1;
+        updateGamesPlayed();
+        return `You lost this round. You chose ${player}, computer chose ${computer}.`;
+      } else {
+        playerScore += 1;
+        updateGamesPlayed();
+        return `You won this round. You chose ${player}, computer chose ${computer}.`;
+      }
+};
 
 
 </script>
